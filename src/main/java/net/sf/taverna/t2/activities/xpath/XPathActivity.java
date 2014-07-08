@@ -1,18 +1,18 @@
 package net.sf.taverna.t2.activities.xpath;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.sf.taverna.t2.invocation.InvocationContext;
 import net.sf.taverna.t2.reference.ErrorDocumentService;
 import net.sf.taverna.t2.reference.ReferenceService;
 import net.sf.taverna.t2.reference.T2Reference;
+import net.sf.taverna.t2.workflowmodel.impl.EditsImpl;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AbstractAsynchronousActivity;
 import net.sf.taverna.t2.workflowmodel.processor.activity.ActivityConfigurationException;
 import net.sf.taverna.t2.workflowmodel.processor.activity.AsynchronousActivityCallback;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -20,8 +20,6 @@ import org.dom4j.InvalidXPathException;
 import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.dom4j.XPathException;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Enhanced XPath activity.
@@ -44,6 +42,9 @@ public class XPathActivity extends AbstractAsynchronousActivity<JsonNode> {
 	// of the activity through the values of its parameters
 	private JsonNode json;
 
+        public XPathActivity(){
+            super(new EditsImpl());
+        }
 	@Override
 	public JsonNode getConfiguration() {
 		return this.json;
